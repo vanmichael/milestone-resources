@@ -1,11 +1,19 @@
-const Koa = require('koa');
-//const Router = require('koa-router');
+'use strict';
 
-const app = new Koa();
-//const app = new Router();
+const express = require('express');
 
-app.use(function *() {
-  this.body = '<h1>Hello Van</h1>';
+const app = express();
+
+app.get('/', (req, res) => {
+  res.status(200).send('Hello, world!');
 });
 
-app.listen(3000);
+if (module === require.main) {
+  const server = app.listen(process.env.PORT || 8081, () => {
+    const port = server.address().port;
+    console.log(`App listening on port ${port}`);
+  });
+  // [END server]
+}
+
+module.exports = app;
