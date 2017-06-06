@@ -1,11 +1,14 @@
 'use strict';
 
 const express = require('express');
-
 const app = express();
+const path = require('path');
+
+app.use('/js', express.static(path.join(__dirname, 'js')));
+app.use('/css', express.static(path.join(__dirname, 'css')));
 
 app.get('/', (req, res) => {
-  res.status(200).send('Hello, world!');
+  res.sendFile(path.join(__dirname + '/index.html'));
 });
 
 if (module === require.main) {
@@ -13,7 +16,6 @@ if (module === require.main) {
     const port = server.address().port;
     console.log(`App listening on port ${port}`);
   });
-  // [END server]
 }
 
 module.exports = app;
